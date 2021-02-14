@@ -1,0 +1,102 @@
+button {
+    color: white;
+    align-self: center;
+    margin: auto 1%;
+}
+
+.side-menu {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.options-icon {
+    margin: auto auto auto 1%;
+}
+
+.elements {
+    display: flex;
+    flex-direction: row;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+i {
+    color: white;
+    font-size: 35px;
+    height: 32px;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+mat-drawer {
+    width: 20% !important;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    width: 90%;
+    margin: 1%;
+    background-color: #007efc;
+    color: white;
+}
+
+.nav-bar {
+    display: flex; 
+    justify-content: space-between;
+    flex-direction: row;
+    background: linear-gradient(90deg, #007efc 0, #40e6ff 100%);
+    padding: 0.5%;
+}
+
+.box {
+    width: 100%;
+    margin: 5% auto 5% auto;
+}
+
+.logo {
+    width: 10%;
+}
+
+.dependencyImg {
+    width: 250px;
+    height: 150px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+::ng-deep .mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+    mat-drawer {
+        width: 70%;
+        text-align: center;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+    }
+    .dependencyImg {
+        width: 250px;
+        height: 150px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 30%;
+    }
+    .logo {
+        width: 40%;
+    }
+}
