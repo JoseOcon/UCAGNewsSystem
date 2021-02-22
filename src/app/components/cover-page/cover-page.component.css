@@ -18,10 +18,10 @@ button {
 
 .elements {
     display: flex;
-    flex-direction: row;
-    margin-right: 3%;
+    flex-direction: row; 
+    margin-right: 3%; 
     margin-left: 3%;
-}
+} 
 
 i {
     color: white;

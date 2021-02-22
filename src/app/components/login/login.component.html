@@ -1,0 +1,83 @@
+<mat-toolbar class="myToolbar">
+  <h2>Inicio de Sesión</h2>
+  <button mat-mini-fab style="color: gray; background-color: white">
+    <i (click)="dialogRef.close()" style="color: black" class="material-icons">
+      clear
+    </i>
+  </button>
+</mat-toolbar>
+<form [formGroup]="loginFG" (ngSubmit)="onSubmit()">
+
+  <img
+    class="comunidadLogo"
+    height="120px"
+    width="180px"
+    src="../../../assets/logo_ucag.png"
+  />
+
+  <mat-form-field>
+    <input
+      #email
+      maxlength="50"
+      matInput
+      placeholder="Correo electrónico"
+      type="email"
+      [formControl]="loginFG.get('email')"
+      pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+    />
+    <span matPrefix>
+      <i class="material-icons">email</i>
+    </span>
+    <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
+    <mat-error
+      *ngIf="
+        loginFG.get('email').errors &&
+        (loginFG.get('email').touched || loginFG.get('email').dirty)
+      "
+    >
+      Por favor ingrese un correo valido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <span matPrefix>
+      <i class="material-icons">https</i>
+    </span>
+    <input
+      matInput
+      placeholder="Ingrese su contraseña"
+      [type]="hide ? 'text' : 'password'"
+      [formControl]="loginFG.get('password')"
+      #password
+      maxlength="20"
+    />
+    <mat-hint align="end">{{ password.value.length }} / 20</mat-hint>
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+    >
+      <i class="material-icons" style="vertical-align: text-bottom;">
+        {{ hide ? "visibility" : "visibility_off" }}
+      </i>
+    </button>
+  </mat-form-field>
+  <div class="buttonContainer">
+    <button
+      class="button"
+      [disabled]="!loginFG.valid"
+      type="submit"
+      mat-raised-button
+      style="width: 90%"
+      (click)="login()"
+    >
+      Iniciar Sesión
+    </button>
+  </div>
+
+  <p style="text-align: center">¿No tienes una cuenta?</p>
+  <p class="ask" target="_blank">Registrame <i class="material-icons">launch</i> </p>
+</form>

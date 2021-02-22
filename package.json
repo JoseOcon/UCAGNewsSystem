@@ -23,6 +23,7 @@
     "@angular/router": "~10.1.2",
     "ngx-filter-pipe": "^2.1.2",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^10.15.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

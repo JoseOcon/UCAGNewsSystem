@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  localstorage_key: "ucag_user",
+  SERVER_URL: "localhost:5000/"
 };
 
 /*

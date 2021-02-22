@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-cover-page',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoverPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogService: MatDialog,
+  ) { }
 
   ngOnInit(): void {
      
+  }
+
+  loginDialog() {
+    this.dialogService.open(LoginComponent, {
+      panelClass: "app-auth-dialog",
+      disableClose: true,
+    });
   }
 
 }

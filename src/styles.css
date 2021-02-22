@@ -1,4 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Estilo para los botones de cerrar los dialogos */
+
+#exit {
+  float: right;
+  margin: 0 0 1% 1%;
+  background-color: transparent;
+}
+
+button:focus {
+  outline: none;
+  border: 0;
+}
+
+/* Estilo responsivo para los dialogos del sistema */
+@media screen and (min-width: 701px) {
+  .full-width-dialog .mat-dialog-container {
+    max-width: 50vw !important;
+    min-width: 30vw !important;
+    padding: 3%;
+  }
+  .app-auth-dialog .mat-dialog-container {
+    max-width: 50vw !important;
+    min-width: 30vw !important;
+    padding: 0 !important;
+  }
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+  mat-form-field {
+    width: 220px;
+    margin: 2%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .full-width-dialog .mat-dialog-container {
+    max-width: 99vw !important;
+    max-height: 80vh !important;
+    padding: 3%;
+  }
+  .app-auth-dialog .mat-dialog-container {
+    max-width: 99vw !important;
+    max-height: 80vh !important;
+    padding: 0 !important;
+  }
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+  mat-form-field {
+    width: 100%;
+    margin: auto;
+    padding: 3%;
+  }
+}
