@@ -14,6 +14,7 @@ import { GeneralService } from 'src/app/services/general.service';
 export class LoginComponent implements OnInit {
   public loginFG: FormGroup;
   hide: boolean = false;
+  recoveryMode = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +24,13 @@ export class LoginComponent implements OnInit {
     public router: Router
   ) {
     this.loginFG = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-@]+$')
+        ],
+      ],
       password: ['', Validators.required],
     });
   }
@@ -31,27 +38,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    let object = {
-      email: this.loginFG.controls['email'].value,
-      userName: this.loginFG.controls['userName'].value,
-      password: this.loginFG.controls['password'].value,
-    };
+    let email = this.loginFG.controls['email'].value;
+    let password = this.loginFG.controls['password'].value;
+
+    this.recoveryMode
+      ? this.recoveryPassword(email)
+      : this.login(email, password);
   }
 
-  login() {
-    let email = this.loginFG.controls['email'].value;
-    let pass = this.loginFG.controls['password'].value;
-
+  login(email, pass) {
     this.authService.login(email, pass).subscribe({
       next: (data: any) => {
-        this.authService.setUserInLocalStorage(data.user);
+        console.info(data)
+        this.authService.setUserInLocalStorage(data.body.response.user_info);
         this.generalService.showMessage(
-          `¡Bienvenido ${data.user.name}!`,
+          `¡Bienvenido ${data.body.response.user_info.name}!`,
           'success'
         );
-        data.user.type == 1
-          ? this.router.navigate(['/admin'])
-          : this.router.navigate(['/user']);
+        // data.user.user_type_id == 1
+        //   ? this.router.navigate(['/admin'])
+        //   : this.router.navigate(['/user']);
       },
       error: (err: HttpErrorResponse) => {
         this.generalService.showMessage(
@@ -60,6 +66,12 @@ export class LoginComponent implements OnInit {
         );
       },
     });
+  }
+
+  recoveryPassword(email) {}
+
+  changeMode() {
+    this.recoveryMode = !this.recoveryMode;
   }
 
   onClose() {

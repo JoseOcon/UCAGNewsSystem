@@ -6,15 +6,35 @@
     </button>
     <button mat-button class="option" (click)="drawer.close()">
       <mat-icon> vpn_key </mat-icon>
-      Cambiar contraseña 
+      Cambiar contraseña
     </button>
   </mat-drawer>
   <mat-drawer-content>
     <div class="nav-bar shadow fixed-top">
-      <i class="material-icons options-icon" (click)="drawer.toggle()">menu</i>
+      <i
+        class="material-icons options-icon"
+        *ngIf="authService.isLoggedIn()"
+        (click)="drawer.toggle()"
+        >menu</i
+      >
+      <img
+        *ngIf="!authService.isLoggedIn()"
+        class="logo"
+        src="../../../assets/news.png"
+        class="logo"
+        alt="logo ucag"
+      />
       <div class="elements">
-        <button mat-button (click)="loginDialog()">Iniciar Sesión</button>
-        <button mat-button>Cerrar sesión</button>
+        <button
+          mat-button
+          *ngIf="!authService.isLoggedIn()"
+          (click)="loginDialog()"
+        >
+          Iniciar Sesión
+        </button>
+        <button mat-button *ngIf="authService.isLoggedIn()" (click)="logOut()">
+          Cerrar sesión
+        </button>
         <button mat-button>Desarrolladores</button>
       </div>
     </div>

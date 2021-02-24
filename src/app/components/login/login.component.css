@@ -36,7 +36,6 @@ mat-toolbar {
 .ask{
     width: 100%;
     margin-bottom: 5px;
-    text-align: center;
     cursor: pointer;
     color: #007efc;
     margin-bottom: 5%;
@@ -51,4 +50,10 @@ mat-toolbar {
 
 i {
     color: #007efc;
+}
+
+h3 {
+    text-align: center;
+    width: 75%;
+    margin: 16px 0;
 }

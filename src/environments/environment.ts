@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   localstorage_key: "ucag_user",
-  SERVER_URL: "localhost:5000/"
+  SERVER_URL: "http://ucag.herokuapp.com/"
 };
 
 /*

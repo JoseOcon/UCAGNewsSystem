@@ -1,11 +1,13 @@
 export interface User {
-    id_user?: number
-    name: string
-    middel_name: string
-    last_name: string
-    email: string
-    ced: string 
+    user_id?: number
     phone_number: number
+    user_type_id: number
+    name: string
+    second_name: string
+    last_name: string
+    email:	string
+    identification:	string
     password: string
-    in_organization?: boolean
+    comunal_member:	boolean
+    active: boolean
 }

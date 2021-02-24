@@ -1,13 +1,14 @@
 <mat-toolbar class="myToolbar">
-  <h2>Inicio de Sesión</h2>
-  <button mat-mini-fab style="color: gray; background-color: white">
-    <i (click)="dialogRef.close()" style="color: black" class="material-icons">
+  <h2>
+    {{ recoveryMode ? "Recuperación de Contraseña" : "Inicio de Sesión" }}
+  </h2>
+  <button mat-icon-button id="exit">
+    <i (click)="dialogRef.close()" style="color: white" class="material-icons">
       clear
     </i>
   </button>
 </mat-toolbar>
-<form [formGroup]="loginFG" (ngSubmit)="onSubmit()">
-
+<form [formGroup]="loginFG">
   <img
     class="comunidadLogo"
     height="120px"
@@ -15,31 +16,26 @@
     src="../../../assets/logo_ucag.png"
   />
 
+  <h3 *ngIf="recoveryMode">
+    Ingrese el correo con el cual se registro para enviarle la información
+  </h3>
+
   <mat-form-field>
     <input
       #email
       maxlength="50"
       matInput
-      placeholder="Correo electrónico"
+      [placeholder]="recoveryMode ? 'Correo electrónico': 'Identificación o correo electrónico'"
       type="email"
       [formControl]="loginFG.get('email')"
-      pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
     />
     <span matPrefix>
-      <i class="material-icons">email</i>
+      <i class="material-icons">{{recoveryMode ? 'mail' : 'person'}}</i>
     </span>
     <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
-    <mat-error
-      *ngIf="
-        loginFG.get('email').errors &&
-        (loginFG.get('email').touched || loginFG.get('email').dirty)
-      "
-    >
-      Por favor ingrese un correo valido
-    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="!recoveryMode">
     <span matPrefix>
       <i class="material-icons">https</i>
     </span>
@@ -60,7 +56,7 @@
       [attr.aria-pressed]="hide"
       type="button"
     >
-      <i class="material-icons" style="vertical-align: text-bottom;">
+      <i class="material-icons" style="vertical-align: text-bottom">
         {{ hide ? "visibility" : "visibility_off" }}
       </i>
     </button>
@@ -72,12 +68,18 @@
       type="submit"
       mat-raised-button
       style="width: 90%"
-      (click)="login()"
+      (click)="onSubmit()"
     >
-      Iniciar Sesión
+      {{ recoveryMode ? "Enviar correo" : "Iniciar Sesión" }}
     </button>
   </div>
 
-  <p style="text-align: center">¿No tienes una cuenta?</p>
-  <p class="ask" target="_blank">Registrame <i class="material-icons">launch</i> </p>
+  <p class="ask" target="_blank" (click)="changeMode()">
+    {{ recoveryMode ? "Volver al Inicio de Sesión" : "Olvidé mi contraseña" }}
+  </p>
+
+  <p *ngIf="!recoveryMode" style="text-align: center">¿No tienes una cuenta?</p>
+  <p *ngIf="!recoveryMode" class="ask" target="_blank">
+    Registrame <i class="material-icons">launch</i>
+  </p>
 </form>

@@ -14,7 +14,8 @@ body {
 #exit {
   float: right;
   margin: 0 0 1% 1%;
-  background-color: transparent;
+  color: white !important;
+  background-color: transparent !important;
 }
 
 button:focus {
@@ -30,8 +31,7 @@ button:focus {
     padding: 3%;
   }
   .app-auth-dialog .mat-dialog-container {
-    max-width: 50vw !important;
-    min-width: 30vw !important;
+    width: 40vw !important;
     padding: 0 !important;
   }
   h2 {

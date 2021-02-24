@@ -62,7 +62,7 @@ mat-drawer {
 }
 
 .logo {
-    width: 10%;
+    width: 5vw;
 }
 
 .dependencyImg {
@@ -97,6 +97,6 @@ mat-drawer {
         margin-top: 30%;
     }
     .logo {
-        width: 40%;
+        width: 15vw;
     }
 }

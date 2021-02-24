@@ -13,12 +13,14 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
-  login(email, password){
-    let json = {
-      email,
+  login(email: string, password: string){
+    let json: any = {
       password
     }
-    return this.http.post(`${environment.SERVER_URL}auth/`, json, {observe: 'response'})
+
+    email.indexOf("@") !== -1 ? json.email = email : json.identification = email
+
+    return this.http.post(`${environment.SERVER_URL}auth/login`, json, {observe: 'response'})
   }
 
   passwordRecovery(email){
