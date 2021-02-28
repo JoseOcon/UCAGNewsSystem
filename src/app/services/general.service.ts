@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import Swal from "sweetalert2";
-import { delay } from "q";
+import Swal from 'sweetalert2';
+import { delay } from 'q';
 
 @Injectable({
   providedIn: 'root',
@@ -10,21 +10,29 @@ export class GeneralService {
 
   constructor() {}
 
-  async showMessage(title: any, icon: any, center?: string) {
+  async showMessage(title: any, icon: any, timer?: number, center?: string) {
     await delay(300);
     const Toast = Swal.mixin({
       toast: true,
-      position: center != undefined ? 'center' : 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      position: center != undefined ? 'center' : 'top-end',
+      timer: timer != undefined ? timer : 3000,
     });
-    Toast.fire({title: title, icon: icon});
+    Toast.fire({ title: title, icon: icon });
   }
 
+  showAlertDialog(title: any, text: any, icon: any){
+    Swal.fire({
+      title,
+      icon,
+      text,
+    })
+  }
+  
   async showAtuhDialog(title: any, timer: any) {
     await Swal.fire({
       title: title,
-      icon: "warning",
+      icon: 'warning',
       html:
         'Pulse el boton para renovar la sesión <br>Tiempo restante: <b></b> seg.',
       timer: timer,

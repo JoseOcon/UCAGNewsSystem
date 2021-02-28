@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(email, pass) {
-    this.authService.login(email, pass).subscribe({
-      next: (data: any) => {
+    this.authService.login(email, pass).subscribe(
+      (data: any) => {
         console.info(data)
         this.authService.setUserInLocalStorage(data.body.response.user_info);
         this.generalService.showMessage(
@@ -60,14 +60,8 @@ export class LoginComponent implements OnInit {
         // data.user.user_type_id == 1
         //   ? this.router.navigate(['/admin'])
         //   : this.router.navigate(['/user']);
-      },
-      error: (err: HttpErrorResponse) => {
-        this.generalService.showMessage(
-          `Ha ocurrido un error: ${err.message}`,
-          'error'
-        );
-      },
-    });
+      }
+    );
   }
 
   recoveryPassword(email) {}

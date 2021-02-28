@@ -9,6 +9,8 @@ import { User } from '../models/user';
 export class AuthService {
   actualUser;
 
+  private module = "auth/"
+
   constructor(
     private http: HttpClient
   ) {}
@@ -20,11 +22,20 @@ export class AuthService {
 
     email.indexOf("@") !== -1 ? json.email = email : json.identification = email
 
-    return this.http.post(`${environment.SERVER_URL}auth/login`, json, {observe: 'response'})
+    return this.http.post(`${environment.SERVER_URL}${this.module}login`, json, {observe: 'response'})
   }
 
-  passwordRecovery(email){
-    return this.http.patch(`${environment.SERVER_URL}auth/`, email, {observe: 'response'})
+  verifyUser(user_id: number){
+
+    let json = {
+      verified: true
+    }
+
+    return this.http.put(`${environment.SERVER_URL}${this.module}${user_id}`, json, {observe: 'response'})
+  }
+
+  passwordRecovery(email: string){
+    return this.http.patch(`${environment.SERVER_URL}${this.module}`, email, {observe: 'response'})
   }
 
   /**

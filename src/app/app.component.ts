@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Noticias Unión Cantonal de Gustuso';
+  title = 'Noticias Unión Cantonal de Guatuso';
 }
