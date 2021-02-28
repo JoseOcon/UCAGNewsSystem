@@ -1,10 +1,11 @@
 form {
-    width: 90%;
     display: flex;
-    flex-direction: column;
+    width: 90%;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     margin: auto;
+    /*background: url('../../../assets/add_user.png') no-repeat center center / 40% ;*/
 }
 
 .buttonContainer {
@@ -20,7 +21,7 @@ form {
 }
 
 mat-form-field {
-    width: 90%;
+    width: 45%;
 }
 
 ::ng-deep.mat-form-field-flex {
@@ -33,27 +34,13 @@ mat-toolbar {
     color: white;
 }
 
-.ask {
-    width: 100%;
-    margin-bottom: 5px;
-    cursor: pointer;
-    color: #007efc;
-    margin-bottom: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ask:hover {
-    text-decoration: underline;
-}
-
-i {
+.pass-icon {
+    vertical-align: text-bottom !important;
     color: #007efc;
 }
 
 h3 {
     text-align: center;
-    width: 75%;
+    width: 100%;
     margin: 16px 0;
 }

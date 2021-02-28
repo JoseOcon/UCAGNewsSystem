@@ -1,0 +1,187 @@
+<mat-toolbar class="myToolbar">
+  <h2>Registro de usuario</h2>
+  <button mat-icon-button id="exit">
+    <i (click)="dialogRef.close()" style="color: white" class="material-icons">
+      clear
+    </i>
+  </button>
+</mat-toolbar>
+
+<form [formGroup]="userFG">
+  <h3>Por favor ingrese los siguientes datos</h3>
+  <mat-hint style="width: 100%; font-style: italic;">Los espacios con un * son requeridos</mat-hint>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input
+      #name
+      maxlength="20"
+      matInput
+      placeholder="Nombre"
+      type="text"
+      [formControl]="userFG.get('name')"
+      required
+    />
+    <mat-hint align="end">{{ name.value.length }} / 20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Segundo nombre</mat-label>
+    <input
+      #secondName
+      maxlength="20"
+      matInput
+      placeholder="Segundo nombre"
+      type="text"
+      [formControl]="userFG.get('second_name')"
+    />
+    <mat-hint align="end">{{ secondName.value.length }} / 20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Apellidos</mat-label>
+    <input
+      #lastName
+      maxlength="60"
+      matInput
+      placeholder="Apellidos"
+      type="text"
+      [formControl]="userFG.get('last_name')"
+      required
+    />
+    <mat-hint align="end">{{ lastName.value.length }} / 60</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cédula</mat-label>
+    <input
+      #identification
+      maxlength="11"
+      matInput
+      placeholder="Formato: 1-1111-1111"
+      type="text"
+      [formControl]="userFG.get('identification')"
+      required
+    />
+    <mat-hint align="end">{{ identification.value.length }} / 11</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo electrónico</mat-label>
+    <input
+      #email
+      maxlength="50"
+      matInput
+      placeholder="Correo electrónico"
+      type="email"
+      [formControl]="userFG.get('email')"
+      name="email"
+      required
+    />
+    <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
+    <mat-error
+      *ngIf="
+        userFG.get('email').errors &&
+        (userFG.get('email').touched || userFG.get('email').dirty)
+      "
+    >
+      Por favor ingrese un correo valido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input
+      #phoneNumber
+      maxlength="9"
+      matInput
+      placeholder="Formatos: 8888-8888 / 8888 8888 / 88888888"
+      type="text"
+      [formControl]="userFG.get('phone_number')"
+      required
+    />
+    <mat-hint align="end">{{ phoneNumber.value.length }} / 9</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Contraseña</mat-label>
+    <input
+      #password
+      maxlength="20"
+      matInput
+      placeholder="Contraseña"
+      [type]="hidePass ? 'text' : 'password'"
+      [formControl]="userFG.get('password')"
+      name="password"
+      required
+    />
+    <mat-hint align="end">{{ password.value.length }} / 20</mat-hint>
+    <button
+      matSuffix
+      class="passwordIcon"
+      mat-icon-button
+      matSuffix
+      (click)="hidePass = !hidePass"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hidePass"
+      type="button"
+    >
+      <i class="material-icons pass-icon">
+        {{ hidePass ? "visibility" : "visibility_off" }}
+      </i>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Confirmación de contraseña</mat-label>
+    <input
+      #confirmPassword
+      maxlength="20"
+      matInput
+      placeholder="Confirmación de contraseña"
+      [type]="hideConfrimPass ? 'text' : 'password'"
+      [formControl]="userFG.get('confirmPassword')"
+      compare="password"
+      required
+    />
+    <mat-hint align="end">{{ confirmPassword.value.length }} / 20</mat-hint>
+    <mat-error
+      *ngIf="
+        userFG.get('confirmPassword').invalid &&
+        (userFG.get('confirmPassword').dirty ||
+          userFG.get('confirmPassword').touched)
+      "
+    >
+      <p *ngIf="userFG.get('confirmPassword').errors['compare']">
+        Las contraseñas proporcionadas son diferentes
+      </p>
+    </mat-error>
+    <button
+      matSuffix
+      class="passwordIcon"
+      mat-icon-button
+      matSuffix
+      (click)="hideConfrimPass = !hideConfrimPass"
+      [attr.aria-label]="'Hide confirmPassword'"
+      [attr.aria-pressed]="hideConfrimPass"
+      type="button"
+    >
+      <i class="material-icons pass-icon">
+        {{ hideConfrimPass ? "visibility" : "visibility_off" }}
+      </i>
+    </button>
+  </mat-form-field>
+
+  <div class="buttonContainer">
+    <button
+      [disabled]="!userFG.valid"
+      type="submit"
+      mat-raised-button
+      class="button"
+      (click)="regisrtyUser()"
+    >
+      Registrarme
+      <i class="material-icons">send</i>
+    </button>
+  </div>
+</form>

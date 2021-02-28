@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { GeneralService } from 'src/app/services/general.service';
+import { RegistryComponent } from '../registry/registry.component';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private generalService: GeneralService,
+    public dialogService: MatDialog,
     public dialogRef: MatDialogRef<LoginComponent>,
     public router: Router
   ) {
@@ -69,6 +71,14 @@ export class LoginComponent implements OnInit {
   }
 
   recoveryPassword(email) {}
+
+  openRegisrtyDialog(){
+    this.onClose()
+    this.dialogService.open(RegistryComponent, {
+      panelClass: "full-width-dialog",
+      disableClose: true,
+    });
+  }
 
   changeMode() {
     this.recoveryMode = !this.recoveryMode;

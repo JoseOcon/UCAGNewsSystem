@@ -20,7 +20,8 @@
     Ingrese el correo con el cual se registro para enviarle la información
   </h3>
 
-  <mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{recoveryMode ? 'Correo electrónico' : 'Identificación o correo electrónico'}}</mat-label>
     <input
       #email
       maxlength="50"
@@ -35,10 +36,11 @@
     <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
   </mat-form-field>
 
-  <mat-form-field *ngIf="!recoveryMode">
+  <mat-form-field appearance="fill" *ngIf="!recoveryMode">
     <span matPrefix>
       <i class="material-icons">https</i>
     </span>
+    <mat-label>Contraseña</mat-label>
     <input
       matInput
       placeholder="Ingrese su contraseña"
@@ -79,7 +81,7 @@
   </p>
 
   <p *ngIf="!recoveryMode" style="text-align: center">¿No tienes una cuenta?</p>
-  <p *ngIf="!recoveryMode" class="ask" target="_blank">
+  <p *ngIf="!recoveryMode" class="ask" target="_blank" (click)="openRegisrtyDialog()">
     Registrame <i class="material-icons">launch</i>
   </p>
 </form>

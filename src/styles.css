@@ -28,7 +28,7 @@ button:focus {
   .full-width-dialog .mat-dialog-container {
     max-width: 50vw !important;
     min-width: 30vw !important;
-    padding: 3%;
+    padding: 0 !important;
   }
   .app-auth-dialog .mat-dialog-container {
     width: 40vw !important;
