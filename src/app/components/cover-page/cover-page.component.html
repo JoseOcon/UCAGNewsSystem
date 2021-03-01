@@ -1,5 +1,5 @@
 <mat-drawer-container class="side-menu" hasBackdrop="true">
-  <mat-drawer #drawer mode="over">
+  <mat-drawer #drawer mode="over" *ngIf="showMenu">
     <button mat-button class="option" (click)="drawer.close()">
       <mat-icon>mic</mat-icon>
       Start Recording
@@ -10,7 +10,7 @@
     </button>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="nav-bar shadow fixed-top">
+    <div class="nav-bar shadow fixed-top" *ngIf="showMenu">
       <i
         class="material-icons options-icon"
         *ngIf="authService.isLoggedIn()"

@@ -6,7 +6,7 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'main-news',
     component: MainViewComponent,
   },
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'verify-account',
+    path: 'authentification',
     children: [
       {
         path: ':user-id',
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'all-news',
+    redirectTo: 'main-news',
     pathMatch: 'full',
   },
 ];

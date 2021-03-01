@@ -25,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon'
 import { FilterPipeModule } from 'ngx-filter-pipe';
 
@@ -58,6 +59,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatStepperModule,
     MatRadioModule,
     MatToolbarModule,
+    MatCardModule,
     MatIconModule,
     FilterPipeModule,
   ],
@@ -87,6 +89,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatStepperModule,
     MatRadioModule,
     MatToolbarModule,
+    MatCardModule,
     MatIconModule,
     FilterPipeModule,
   ],
