@@ -1,12 +1,9 @@
 <div class="mainContainer">
   <mat-card class="my-card">
-    <img
-      class="ucagLogo"
-      src="../../../assets/logo_ucag.png"
-    />
+    <img class="ucagLogo" src="../../../assets/logo_ucag.png" />
 
     <h3>Verificando su cuenta, no cierre la pestaña</h3>
     <mat-spinner *ngIf="!verified"></mat-spinner>
-   <a *ngIf="verified" href="http://localhost:4200/">Ir a la página de UCAG</a> 
+    <a *ngIf="verified" [href]="url">Ir a la página de UCAG</a>
   </mat-card>
 </div>

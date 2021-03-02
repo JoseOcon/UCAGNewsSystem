@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class VerifyAccountComponent implements OnInit {
 
   verified: boolean = false;
+  url = "http://localhost:4200/"
 
   constructor(
     private router: Router,
@@ -23,9 +24,8 @@ export class VerifyAccountComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         let user_id = +event.url.split('/authentification/')[1];
-        console.log(user_id);
         this.auhtService.verifyUser(user_id).subscribe((data: any) => {
-          //if (data.status == 204) {
+          if (data.status == 204) {
             this.generalService
               .showAlertDialog(
                 'Su cuenta ha sido verificada con éxito',
@@ -33,7 +33,7 @@ export class VerifyAccountComponent implements OnInit {
                 'success'
               )
             this.verified = true;
-          //}
+          }
         });
       });
   }

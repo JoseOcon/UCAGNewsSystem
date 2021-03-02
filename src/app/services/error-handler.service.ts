@@ -66,7 +66,7 @@ export class ErrorHandlerService implements HttpInterceptor {
         }else{
          console.log("UNHANDLED ERROR") 
         }
-        return throwError(err);
+        return throwError('Código de error: ' + errorCode);
       })
     );
   }

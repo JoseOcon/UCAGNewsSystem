@@ -19,20 +19,44 @@
     Ingrese el correo con el cual se registro para enviarle la información
   </h3>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{recoveryMode ? 'Correo electrónico' : 'Identificación o correo electrónico'}}</mat-label>
+  <mat-form-field appearance="fill" *ngIf="!recoveryMode">
+    <mat-label>Identificación o correo electrónico</mat-label>
     <input
       #email
       maxlength="50"
       matInput
-      [placeholder]="recoveryMode ? 'Correo electrónico': 'Identificación o correo electrónico'"
+      placeholder="Identificación o correo electrónico"
       type="email"
       [formControl]="loginFG.get('email')"
     />
     <span matPrefix>
-      <i class="material-icons">{{recoveryMode ? 'mail' : 'person'}}</i>
+      <i class="material-icons">person</i>
     </span>
     <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="recoveryMode">
+    <mat-label>Correo electrónico</mat-label>
+    <input
+      #recovery_email
+      maxlength="50"
+      matInput
+      placeholder="Correo electrónico"
+      type="email"
+      [formControl]="loginFG.get('recovery_email')"
+    />
+    <span matPrefix>
+      <i class="material-icons">mail</i>
+    </span>
+    <mat-hint align="end">{{ recovery_email.value.length }} / 50</mat-hint>
+    <mat-error
+      *ngIf="
+        loginFG.get('recovery_email').errors &&
+        (loginFG.get('recovery_email').touched || loginFG.get('recovery_email').dirty)
+      "
+    >
+      Por favor ingrese un correo válido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill" *ngIf="!recoveryMode">
@@ -65,7 +89,7 @@
   <div class="buttonContainer">
     <button
       class="button"
-      [disabled]="!loginFG.valid"
+      [disabled]="disableDialog()"
       type="submit"
       mat-raised-button
       style="width: 90%"

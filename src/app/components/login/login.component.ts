@@ -28,9 +28,13 @@ export class LoginComponent implements OnInit {
     this.loginFG = this.formBuilder.group({
       email: [
         '',
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-@]+$')],
+      ],
+      recovery_email: [
+        '',
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-@]+$')
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z0-9-.]+$'),
         ],
       ],
       password: ['', Validators.required],
@@ -42,36 +46,61 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     let email = this.loginFG.controls['email'].value;
     let password = this.loginFG.controls['password'].value;
+    let recovery_email = this.loginFG.controls['recovery_email'].value;
 
     this.recoveryMode
-      ? this.recoveryPassword(email)
+      ? this.recoveryPassword(recovery_email)
       : this.login(email, password);
   }
 
   login(email, pass) {
-    this.authService.login(email, pass).subscribe(
-      (data: any) => {
-        console.info(data)
-        this.authService.setUserInLocalStorage(data.body.response.user_info);
-        this.generalService.showMessage(
-          `¡Bienvenido ${data.body.response.user_info.name}!`,
-          'success'
-        );
-        // data.user.user_type_id == 1
-        //   ? this.router.navigate(['/admin'])
-        //   : this.router.navigate(['/user']);
-      }
-    );
+    this.authService.login(email, pass).subscribe((data: any) => {
+      console.info(data);
+      this.authService.setUserInLocalStorage(data.body.response.user_info);
+      this.generalService.showMessage(
+        `¡Bienvenido ${data.body.response.user_info.name}!`,
+        'success'
+      );
+      this.onClose();
+      // data.user.user_type_id == 1
+      //   ? this.router.navigate(['/admin'])
+      //   : this.router.navigate(['/user']);
+    });
   }
 
-  recoveryPassword(email) {}
+  recoveryPassword(email) {
+    this.authService.passwordRecovery(email).subscribe((data: any) => {
+      if (data.status == 204) {
+        this.generalService.showAlertDialog(
+          'Se ha enviado un correo de recuperación',
+          '¡Revisa tu correo!',
+          'success'
+        );
+        this.onClose();
+      }
+    });
+  }
 
-  openRegisrtyDialog(){
-    this.onClose()
+  openRegisrtyDialog() {
+    this.onClose();
     this.dialogService.open(RegistryComponent, {
-      panelClass: "full-width-dialog",
+      panelClass: 'full-width-dialog',
       disableClose: true,
     });
+  }
+
+  disableDialog(): boolean {
+    if (this.recoveryMode && this.loginFG.controls['recovery_email'].valid) {
+      return false;
+    } else if (
+      !this.recoveryMode &&
+      this.loginFG.controls['email'].valid &&
+      this.loginFG.controls['password'].valid
+    ) {
+      return false
+    }else {
+      return true
+    }
   }
 
   changeMode() {
