@@ -28,7 +28,6 @@ export class ResetPasswordComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.user_uuid = event.url.split('/reset-password/')[1];
-        console.log(this.user_uuid);
       });
 
     this.resetFG = this.formBuilder.group({
