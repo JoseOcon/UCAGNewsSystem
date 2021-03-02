@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { GeneralService } from 'src/app/services/general.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-verify-account',
   templateUrl: './verify-account.component.html',
-  styleUrls: ['./verify-account.component.css']
+  styleUrls: ['./verify-account.component.css'],
 })
 export class VerifyAccountComponent implements OnInit {
 
-  constructor() { }
+  verified: boolean = false;
 
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private auhtService: AuthService,
+    private generalService: GeneralService
+  ) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        let user_id = +event.url.split('/authentification/')[1];
+        console.log(user_id);
+        this.auhtService.verifyUser(user_id).subscribe((data: any) => {
+          //if (data.status == 204) {
+            this.generalService
+              .showAlertDialog(
+                'Su cuenta ha sido verificada con éxito',
+                '',
+                'success'
+              )
+            this.verified = true;
+          //}
+        });
+      });
   }
 
+  ngOnInit(): void {}
 }

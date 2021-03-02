@@ -21,12 +21,15 @@ export class GeneralService {
     Toast.fire({ title: title, icon: icon });
   }
 
-  showAlertDialog(title: any, text: any, icon: any){
-    Swal.fire({
+  async showAlertDialog(title: any, text: any, icon: any){
+    await Swal.fire({
       title,
       icon,
       text,
-    })
+    }).then((result) => {
+      this.bool = result.value;
+    });
+    return this.bool;
   }
   
   async showAtuhDialog(title: any, timer: any) {

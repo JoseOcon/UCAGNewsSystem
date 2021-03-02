@@ -6,6 +6,7 @@
     />
 
     <h3>Verificando su cuenta, no cierre la pestaña</h3>
-    <mat-spinner></mat-spinner>
+    <mat-spinner *ngIf="!verified"></mat-spinner>
+   <a *ngIf="verified" href="http://localhost:4200/">Ir a la página de UCAG</a> 
   </mat-card>
 </div>

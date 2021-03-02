@@ -31,7 +31,7 @@ export class AuthService {
       verified: true
     }
 
-    return this.http.put(`${environment.SERVER_URL}${this.module}${user_id}`, json, {observe: 'response'})
+    return this.http.put(`${environment.SERVER_URL}user/${user_id}`, json, {observe: 'response'})
   }
 
   passwordRecovery(email: string){
