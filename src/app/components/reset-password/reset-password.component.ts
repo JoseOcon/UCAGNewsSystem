@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { GeneralService } from 'src/app/services/general.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   hideConfrimPass: boolean = false;
   user_uuid;
   passReseted: boolean = false;
-  url = 'http://localhost:4200/';
+  url = environment.SERVER_URL
 
   constructor(
     private formBuilder: FormBuilder,

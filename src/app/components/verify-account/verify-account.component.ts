@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { GeneralService } from 'src/app/services/general.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-verify-account',
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class VerifyAccountComponent implements OnInit {
 
   verified: boolean = false;
-  url = "http://localhost:4200/"
+  url = environment.SERVER_URL
 
   constructor(
     private router: Router,
