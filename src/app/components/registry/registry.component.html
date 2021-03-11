@@ -7,7 +7,7 @@
   </button>
 </mat-toolbar>
 
-<form [formGroup]="userFG">
+<form [formGroup]="userFG" [style.opacity]="loading ? '0.5' : 1">
   <h3>Por favor ingrese los siguientes datos</h3>
   <mat-hint style="width: 100%; font-style: italic;">Los espacios con un * son requeridos</mat-hint>
 
@@ -184,4 +184,6 @@
       <i class="material-icons">send</i>
     </button>
   </div>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </form>

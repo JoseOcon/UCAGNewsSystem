@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public loginFG: FormGroup;
   hide: boolean = false;
   recoveryMode = false;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +35,9 @@ export class LoginComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z0-9-.]+$'),
+          Validators.pattern(
+            '^[a-zA-Z0-9_.+-]+@{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z0-9-.]+$'
+          ),
         ],
       ],
       password: ['', Validators.required],
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    this.loading = true;
     let email = this.loginFG.controls['email'].value;
     let password = this.loginFG.controls['password'].value;
     let recovery_email = this.loginFG.controls['recovery_email'].value;
@@ -54,30 +58,47 @@ export class LoginComponent implements OnInit {
   }
 
   login(email, pass) {
-    this.authService.login(email, pass).subscribe((data: any) => {
-      console.info(data);
-      this.authService.setUserInLocalStorage(data.body.response.user_info);
-      this.generalService.showMessage(
-        `¡Bienvenido ${data.body.response.user_info.name}!`,
-        'success'
-      );
-      this.onClose();
-      // data.user.user_type_id == 1
-      //   ? this.router.navigate(['/admin'])
-      //   : this.router.navigate(['/user']);
+    this.authService.login(email, pass).subscribe({
+      next: (data: any) => {
+        if (data.status == 200) {
+          this.loading = false;
+          this.authService.setUserInLocalStorage(data.body.response.user_info);
+          this.generalService.showMessage(
+            `¡Bienvenido ${data.body.response.user_info.name}!`,
+            'success'
+          );
+          this.onClose();
+          // data.user.user_type_id == 1
+          //   ? this.router.navigate(['/admin'])
+          //   : this.router.navigate(['/user']);
+        }else{
+          this.loading = false;
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = false;
+      },
     });
   }
 
   recoveryPassword(email) {
-    this.authService.passwordRecovery(email).subscribe((data: any) => {
-      if (data.status == 204) {
-        this.generalService.showAlertDialog(
-          'Se ha enviado un correo de recuperación',
-          '¡Revisa tu correo!',
-          'success'
-        );
-        this.onClose();
-      }
+    this.authService.passwordRecovery(email).subscribe({
+      next: (data: any) => {
+        if (data.status == 204) {
+          this.loading = false;
+          this.generalService.showAlertDialog(
+            '¡Listo!',
+            'Se te ha enviado un correo revisa tu badeja de entrada',
+            'success'
+          );
+          this.onClose();
+        } else {
+          this.loading = false;
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = false;
+      },
     });
   }
 
@@ -97,9 +118,9 @@ export class LoginComponent implements OnInit {
       this.loginFG.controls['email'].valid &&
       this.loginFG.controls['password'].valid
     ) {
-      return false
-    }else {
-      return true
+      return false;
+    } else {
+      return true;
     }
   }
 

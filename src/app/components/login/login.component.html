@@ -8,7 +8,7 @@
     </i>
   </button>
 </mat-toolbar>
-<form [formGroup]="loginFG">
+<form [formGroup]="loginFG" [style.opacity]="loading ? '0.5' : 1">
   <img
     height="120px"
     width="180px"
@@ -107,4 +107,6 @@
   <p *ngIf="!recoveryMode" class="ask" target="_blank" (click)="openRegisrtyDialog()">
     Registrame <i class="material-icons">launch</i>
   </p>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </form>
