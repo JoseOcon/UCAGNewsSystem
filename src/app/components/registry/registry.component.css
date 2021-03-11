@@ -45,6 +45,10 @@ h3 {
     margin: 16px 0;
 }
 
+mat-spinner {
+    position: fixed;
+}
+
 @media screen and (max-width: 700px) {
     mat-form-field {
         width: 90%;

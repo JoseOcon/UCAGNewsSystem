@@ -15,8 +15,9 @@ export class RegistryComponent implements OnInit {
   public userFG: FormGroup;
   hidePass: boolean = false;
   hideConfrimPass: boolean = false;
+  loading: boolean = false;
   chars: string =
-    '(^[a-zA-Z0-9á-úÁ-Ú|`´üÿÜŸýÝ\'¿?¡!<>~|/])([a-zA-Z0-9á-úÁ-Ú | -_\'`´üÿÜŸýÝ,;:.¿?¡!<>~|/{\'}])*$';
+    "(^[a-zA-Z0-9á-úÁ-Ú|`´üÿÜŸýÝ'¿?¡!<>~|/])([a-zA-Z0-9á-úÁ-Ú | -_'`´üÿÜŸýÝ,;:.¿?¡!<>~|/{'}])*$";
 
   constructor(
     public dialogRef: MatDialogRef<RegistryComponent>,
@@ -25,15 +26,9 @@ export class RegistryComponent implements OnInit {
     public generalService: GeneralService
   ) {
     this.userFG = this.formBuilder.group({
-      name: [
-        '',
-        [Validators.required, Validators.pattern(this.chars)],
-      ],
+      name: ['', [Validators.required, Validators.pattern(this.chars)]],
       second_name: ['', Validators.pattern(this.chars)],
-      last_name: [
-        '',
-        [Validators.required, Validators.pattern(this.chars)],
-      ],
+      last_name: ['', [Validators.required, Validators.pattern(this.chars)]],
       identification: [
         '',
         [
@@ -63,6 +58,7 @@ export class RegistryComponent implements OnInit {
   ngOnInit(): void {}
 
   regisrtyUser() {
+    this.loading = true;
     let user: User = {
       name: this.userFG.controls['name'].value,
       second_name: this.userFG.controls['second_name'].value,
@@ -72,16 +68,25 @@ export class RegistryComponent implements OnInit {
       phone_number: this.userFG.controls['phone_number'].value,
       password: this.userFG.controls['password'].value,
       user_type_id: 1,
-      comunal_member: false
+      comunal_member: false,
     };
 
-    this.userService.createUser(user).subscribe(
-      (data: any) => {
+    this.userService.createUser(user).subscribe({
+      next: (data: any) => {
         if (data.status == 201) {
+          this.loading = false;
           this.dialogRef.close();
-          this.generalService.showAlertDialog('Registro Éxitoso', 'Se le ha enviado un correo con de verificación', 'success');
+          this.generalService.showAlertDialog(
+            'Registro Éxitoso',
+            'Se le ha enviado un correo con de verificación',
+            'success'
+          );
+        } else {
+          this.loading = false;
         }
+      },error: (err: HttpErrorResponse) => {
+        this.loading = false;
       }
-    );
+    });
   }
 }
