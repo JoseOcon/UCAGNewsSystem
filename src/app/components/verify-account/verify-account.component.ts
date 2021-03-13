@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 export class VerifyAccountComponent implements OnInit {
 
   verified: boolean = false;
-  url = environment.SERVER_URL
+  url = environment.FRONT_URL
 
   constructor(
     private router: Router,

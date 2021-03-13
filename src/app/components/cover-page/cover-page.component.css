@@ -25,8 +25,21 @@ button {
 
 i {
     color: white;
-    font-size: 35px;
-    height: 32px;
+    font-size: 32px;
+    vertical-align: middle !important;
+}
+
+mat-icon {
+    font-size: 20px;
+    vertical-align: middle !important;
+}
+
+button.mat-menu-item {
+    margin: 0;
+}
+
+span {
+    color: black;
 }
 
 i:hover {
@@ -34,7 +47,7 @@ i:hover {
 }
 
 mat-drawer {
-    width: 20% !important;
+    width: 20%;
     text-align: center;
     background-color: white;
     display: flex;
@@ -65,12 +78,12 @@ mat-drawer {
     width: 5vw;
 }
 
-.dependencyImg {
-    width: 250px;
-    height: 150px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.account-icon {
+    background-color: white;
+}
+
+::ng-deep .mat-mini-fab .mat-button-wrapper {
+    padding: 4px 0 !important;
 }
 
 ::ng-deep .mat-drawer-inner-container {

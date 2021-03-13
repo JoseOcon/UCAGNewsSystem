@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ErrorHandlerService } from './services/error-handler.service';
     CompareValidatorDirective,
     ResetPasswordComponent,
     MainViewComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

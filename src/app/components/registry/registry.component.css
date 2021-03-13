@@ -5,7 +5,6 @@ form {
     align-items: center;
     justify-content: center;
     margin: auto;
-    /*background: url('../../../assets/add_user.png') no-repeat center center / 40% ;*/
 }
 
 .buttonContainer {
@@ -35,7 +34,7 @@ mat-toolbar {
 }
 
 .pass-icon {
-    vertical-align: text-bottom !important;
+    vertical-align: super !important;
     color: #007efc;
 }
 

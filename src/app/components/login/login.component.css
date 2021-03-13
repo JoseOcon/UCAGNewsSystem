@@ -48,7 +48,8 @@ mat-toolbar {
     text-decoration: underline;
 }
 
-i {
+.my-icon {
+    vertical-align: super !important;
     color: #007efc;
 }
 

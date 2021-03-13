@@ -53,17 +53,26 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Cédula</mat-label>
+    <mat-label>Cédula - Formato: 101230123 </mat-label>
     <input
       #identification
-      maxlength="11"
+      maxlength="9"
       matInput
-      placeholder="Formato: 1-1111-1111"
+      placeholder="Formato: 101230123"
       type="text"
       [formControl]="userFG.get('identification')"
       required
     />
-    <mat-hint align="end">{{ identification.value.length }} / 11</mat-hint>
+    <mat-hint align="end">{{ identification.value.length }} / 9</mat-hint>
+    <mat-error
+      *ngIf="
+        userFG.get('identification').invalid &&
+        (userFG.get('identification').dirty ||
+          userFG.get('identification').touched)
+      "
+    >
+      Por favor ingrese una cédula válida
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -101,6 +110,15 @@
       required
     />
     <mat-hint align="end">{{ phoneNumber.value.length }} / 9</mat-hint>
+    <mat-error
+      *ngIf="
+        userFG.get('phone_number').invalid &&
+        (userFG.get('phone_number').dirty ||
+          userFG.get('phone_number').touched)
+      "
+    >
+      Por favor ingrese un teléfono válido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">

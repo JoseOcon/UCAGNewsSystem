@@ -33,7 +33,7 @@ export class RegistryComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('[0-9]{1}[-]{1}[0-9]{4}[-]{1}[0-9]{4}'),
+          Validators.pattern('[0-9]{9}'),
         ],
       ],
       email: [

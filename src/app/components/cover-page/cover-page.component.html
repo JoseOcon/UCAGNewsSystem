@@ -1,5 +1,5 @@
 <mat-drawer-container class="side-menu" hasBackdrop="true">
-  <mat-drawer #drawer mode="over" *ngIf="showMenu">
+  <mat-drawer #drawer mode="over" [hidden]="!showMenu">
     <button mat-button class="option" (click)="drawer.close()">
       <mat-icon>mic</mat-icon>
       Start Recording
@@ -10,7 +10,7 @@
     </button>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="nav-bar shadow fixed-top" *ngIf="showMenu">
+    <div class="nav-bar shadow fixed-top" [hidden]="!showMenu">
       <i
         class="material-icons options-icon"
         *ngIf="authService.isLoggedIn()"
@@ -32,10 +32,24 @@
         >
           Iniciar Sesión
         </button>
-        <button mat-button *ngIf="authService.isLoggedIn()" (click)="logOut()">
-          Cerrar sesión
+        <button
+          *ngIf="authService.isLoggedIn()"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <i class="material-icons">account_circle</i>
         </button>
-        <button mat-button>Desarrolladores</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/profile']">
+            <mat-icon>manage_accounts</mat-icon>
+            <span>Perfil</span>
+          </button>
+          <button mat-menu-item (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+            <span>Cerrar Sesión</span>
+          </button>
+        </mat-menu>
       </div>
     </div>
     <router-outlet></router-outlet>

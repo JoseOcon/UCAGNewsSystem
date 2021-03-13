@@ -46,6 +46,6 @@ export class CoverPageComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
-    //this.router.navigateByUrl('/all-news')
+    this.router.navigateByUrl('/main')
   }
 }

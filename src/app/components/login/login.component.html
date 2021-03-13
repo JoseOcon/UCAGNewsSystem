@@ -30,7 +30,7 @@
       [formControl]="loginFG.get('email')"
     />
     <span matPrefix>
-      <i class="material-icons">person</i>
+      <i class="material-icons my-icon">person</i>
     </span>
     <mat-hint align="end">{{ email.value.length }} / 50</mat-hint>
   </mat-form-field>
@@ -46,7 +46,7 @@
       [formControl]="loginFG.get('recovery_email')"
     />
     <span matPrefix>
-      <i class="material-icons">mail</i>
+      <i class="material-icons my-icon">mail</i>
     </span>
     <mat-hint align="end">{{ recovery_email.value.length }} / 50</mat-hint>
     <mat-error
@@ -61,7 +61,7 @@
 
   <mat-form-field appearance="fill" *ngIf="!recoveryMode">
     <span matPrefix>
-      <i class="material-icons">https</i>
+      <i class="material-icons my-icon">https</i>
     </span>
     <mat-label>Contraseña</mat-label>
     <input
@@ -81,7 +81,7 @@
       [attr.aria-pressed]="hide"
       type="button"
     >
-      <i class="material-icons" style="vertical-align: text-bottom">
+      <i class="material-icons my-icon">
         {{ hide ? "visibility" : "visibility_off" }}
       </i>
     </button>

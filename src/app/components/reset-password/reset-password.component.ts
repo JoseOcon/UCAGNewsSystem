@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   hideConfrimPass: boolean = false;
   user_uuid;
   passReseted: boolean = false;
-  url = environment.SERVER_URL
+  url = environment.FRONT_URL
 
   constructor(
     private formBuilder: FormBuilder,

@@ -68,9 +68,7 @@ export class LoginComponent implements OnInit {
             'success'
           );
           this.onClose();
-          // data.user.user_type_id == 1
-          //   ? this.router.navigate(['/admin'])
-          //   : this.router.navigate(['/user']);
+          this.router.navigate(['/profile']);
         }else{
           this.loading = false;
         }
