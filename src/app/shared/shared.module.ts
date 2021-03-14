@@ -26,7 +26,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
@@ -61,6 +62,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
+    MatDividerModule,
     FilterPipeModule,
   ],
   exports: [
@@ -91,6 +93,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
+    MatDividerModule,
     FilterPipeModule,
   ],
 })

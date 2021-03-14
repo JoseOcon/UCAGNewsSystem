@@ -1,0 +1,148 @@
+.mainContainer {
+  width: 80vw;
+  margin: 10vh auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  width: 45%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+.img-container {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  display: inline-block;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.img-options {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.img-button-container {
+  width: 20vw;
+  margin: 2.5%;
+  border: solid 1.5px rgb(220, 220, 220);
+  border-radius: 5px;
+}
+
+.image-buttons {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.image-buttons mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+label:hover {
+  background-color: whitesmoke;
+}
+
+.add-img-button {
+  border-radius: 5px;
+  color: #007efc;
+  text-align: center;
+  padding-top: 5%;
+  margin: 0%;
+}
+
+.my-icon {
+  vertical-align: bottom !important;
+  color: #007efc;
+}
+
+h1 {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+#edit {
+  float: right;
+  background-color: white;
+  position: fixed;
+  top: 15%;
+  left: 90%;
+}
+
+#save-info {
+  float: right;
+  background-color: white;
+  color: #007efc;
+  position: fixed;
+  top: 25%;
+  left: 90%;
+}
+
+::ng-deep .mat-form-field-prefix, .mat-form-field-suffix {
+  margin-right: 10px;
+}
+
+@media  screen and (max-width: 700px){
+  .mainContainer{
+    flex-direction: column;
+  }
+
+  form {
+    width: 100%;
+    margin: 5% 0;
+  }
+
+  .img-button-container {
+    width: 50vw;
+  }
+  
+  .image-buttons {
+    width: 40vw;
+  }
+  
+  .image-buttons mat-icon {
+    font-size: 30px;
+    width: 50px;
+    height: 30px;
+  }
+
+  #edit {
+    top: 10%;
+    left: 80%;
+  }
+  
+  #save-info {
+    top: 20%;
+    left: 80%;
+  }
+
+  img {
+    width: 30vw;
+    height: 30vw;
+  }
+}
