@@ -23,7 +23,17 @@ button:focus {
   border: 0;
 }
 
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: white !important;
+}
+
+.mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex {
+  border-radius: 4px !important;
+  background-color: whitesmoke !important
+}
+
 /* Estilo responsivo para los dialogos del sistema */
+
 @media screen and (min-width: 701px) {
   .full-width-dialog .mat-dialog-container {
     max-width: 50vw !important;
@@ -65,5 +75,11 @@ button:focus {
     width: 100%;
     margin: auto;
     padding: 3%;
+  }
+}
+
+@media screen and (max-height: 360px) {
+  .swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
+    height: 90vh !important;
   }
 }

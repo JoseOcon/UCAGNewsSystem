@@ -22,11 +22,11 @@ export class CoverPageComponent implements OnInit {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
-        this.currentRoute = event.url
+        this.currentRoute = event.url;
         console.log(this.currentRoute);
         if (
           this.currentRoute.indexOf('/authentification') !== -1 ||
-          this.currentRoute.indexOf('/reset-password') !== -1 
+          this.currentRoute.indexOf('/reset-password') !== -1
         ) {
           this.showMenu = false;
         }
@@ -34,7 +34,9 @@ export class CoverPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    let user = this.authService.getUser();
+    user = !undefined ? (this.authService.actualUser = user) : null;
+    console.log(this.authService.actualUser)
   }
 
   loginDialog() {
@@ -46,6 +48,6 @@ export class CoverPageComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
-    this.router.navigateByUrl('/main')
+    this.router.navigateByUrl('/main');
   }
 }

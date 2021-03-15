@@ -92,6 +92,7 @@ h1 {
   position: fixed;
   top: 15%;
   left: 90%;
+  z-index: 1000;
 }
 
 #save-info {
@@ -101,10 +102,55 @@ h1 {
   position: fixed;
   top: 25%;
   left: 90%;
+  z-index: 1000;
 }
 
 ::ng-deep .mat-form-field-prefix, .mat-form-field-suffix {
   margin-right: 10px;
+}
+
+::ng-deep.mat-form-field-type-mat-native-select.mat-form-field-disabled
+  .mat-form-field-infix::after,
+.mat-input-element:disabled {
+  color: black;
+}
+
+@media  screen and (max-height: 360px) {
+  .mainContainer {
+    margin: 15vh auto auto auto;
+  }
+
+  #edit {
+    top: 20% !important;
+    left: 90% !important;
+  }
+  
+  #save-info {
+    top: 40% !important;
+    left: 90% !important;
+  }
+
+  img {
+    width: 15vw !important;
+    height: 15vw !important;
+  }
+
+  .img-button-container {
+    width: 30vw !important;
+    align-items: center !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  .image-buttons {
+    width: 10vw !important;
+  }
+  
+  .image-buttons mat-icon {
+    font-size: 30px !important;
+    width: 25px !important;
+    height: 30px !important;
+  }
 }
 
 @media  screen and (max-width: 700px){
@@ -144,5 +190,9 @@ h1 {
   img {
     width: 30vw;
     height: 30vw;
+  }
+
+  mat-form-field {
+    padding: 0;
   }
 }

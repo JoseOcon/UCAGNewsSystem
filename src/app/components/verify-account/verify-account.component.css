@@ -14,8 +14,8 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    width: 60vw !important;
-    height: 70vh !important;
+    width: 60vw;
+    height: 70vh;
     margin: 0 1%;
     border-radius: 25px;
     background: url('../../../assets/texture.jpg');
@@ -29,20 +29,36 @@ h3 {
 }
 
 .ucagLogo{
-    width: 35vw !important;
+    width: 35vw;
 }
 
 ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #007efc;
 }
 
+@media  screen and (max-height: 360px) {
+    .my-card {
+        width: 80vw !important;
+        height: 90vh !important;
+    }
+
+    mat-spinner {
+        position: fixed !important;
+        top: 50% !important;
+    }
+
+    .ucagLogo{
+        width: 25vw !important;
+    }
+}
+
 @media  screen and (max-width: 700px) {
     .ucagLogo{
-        width: 65vw !important;
+        width: 65vw;
     }
 
     .my-card {
-        width: 80vw !important;
-        height: 70vh !important;
+        width: 80vw;
+        height: 70vh;
     }
 }

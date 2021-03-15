@@ -29,6 +29,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [],
@@ -64,6 +65,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatIconModule,
     MatDividerModule,
     FilterPipeModule,
+    AvatarModule
   ],
   exports: [
     MatSidenavModule,
@@ -95,6 +97,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     MatIconModule,
     MatDividerModule,
     FilterPipeModule,
+    AvatarModule
   ],
 })
 export class SharedModule {}

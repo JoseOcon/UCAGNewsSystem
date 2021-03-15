@@ -32,14 +32,16 @@
         >
           Iniciar Sesión
         </button>
-        <button
+        <ngx-avatar
           *ngIf="authService.isLoggedIn()"
-          mat-icon-button
+          [src]="
+            this.authService.actualUser.imgURL != undefined
+              ? '../../../assets/user_profile.png'
+              : '../../../assets/no_profile_img.png'
+          "
+          size="35"
           [matMenuTriggerFor]="menu"
-          aria-label="Example icon-button with a menu"
-        >
-          <i class="material-icons">account_circle</i>
-        </button>
+        ></ngx-avatar>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="['/profile']">
             <mat-icon>manage_accounts</mat-icon>
