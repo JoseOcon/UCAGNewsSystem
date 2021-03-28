@@ -11,4 +11,5 @@ export interface User {
     comunal_member?:	boolean
     active?: boolean
     verified?: boolean
+    imgURL?: string
 }

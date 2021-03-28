@@ -128,26 +128,12 @@
       maxlength="20"
       matInput
       placeholder="Contraseña"
-      [type]="hidePass ? 'text' : 'password'"
+      type="password"
       [formControl]="userFG.get('password')"
       name="password"
       required
     />
     <mat-hint align="end">{{ password.value.length }} / 20</mat-hint>
-    <button
-      matSuffix
-      class="passwordIcon"
-      mat-icon-button
-      matSuffix
-      (click)="hidePass = !hidePass"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hidePass"
-      type="button"
-    >
-      <i class="material-icons pass-icon">
-        {{ hidePass ? "visibility" : "visibility_off" }}
-      </i>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -157,7 +143,7 @@
       maxlength="20"
       matInput
       placeholder="Confirmación de contraseña"
-      [type]="hideConfrimPass ? 'text' : 'password'"
+      type="password"
       [formControl]="userFG.get('confirmPassword')"
       compare="password"
       required
@@ -174,20 +160,6 @@
         Las contraseñas proporcionadas son diferentes
       </p>
     </mat-error>
-    <button
-      matSuffix
-      class="passwordIcon"
-      mat-icon-button
-      matSuffix
-      (click)="hideConfrimPass = !hideConfrimPass"
-      [attr.aria-label]="'Hide confirmPassword'"
-      [attr.aria-pressed]="hideConfrimPass"
-      type="button"
-    >
-      <i class="material-icons pass-icon">
-        {{ hideConfrimPass ? "visibility" : "visibility_off" }}
-      </i>
-    </button>
   </mat-form-field>
 
   <div class="buttonContainer">

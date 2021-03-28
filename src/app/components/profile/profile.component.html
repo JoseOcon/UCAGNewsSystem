@@ -1,26 +1,27 @@
-<div class="mainContainer">
-  <button mat-mini-fab id="edit">
+<div class="mainContainer" >
+  <button mat-mini-fab id="edit" [disabled]="this.loading">
     <i
       class="material-icons"
-      [style.color]="this.editMode ? 'red' : '#007efc'"
-      (click)="switchForm()"
+      [style.color]="this.loading ? 'gray' : this.editMode ? 'red' : '#007efc'"
+      [matTooltip]="this.editMode ? 'Cancelar' : 'Editar perfil'"
+      (click)=" this.loading ? 'none' : switchForm()"
     >
       {{ this.editMode ? "clear" : "edit" }}
     </i>
   </button>
 
-  <button *ngIf="this.editMode" mat-mini-fab id="save-info">
-    <i class="material-icons" (click)="editUser()"> save </i>
+  <button *ngIf="this.editMode" mat-mini-fab id="save-info" matTooltip="Guardar cambios" [disabled]="!isDifferent() || this.loading">
+    <i class="material-icons" (click)="this.loading ? 'none' : isDifferent() ? editUser() : 'none'"> save </i>
   </button>
 
   <h1>Mi Perfil</h1>
 
   <div class="img-container">
-    <img src="../../../assets/user_profile.png" />
+    <img [src]="this.user.imgURL != undefined ? 'this.user.imgURL' : '../../../assets/user_profile.png'" />
     <div class="img-options">
       <div title="Añadir imagen" class="img-button-container">
         <label for="file-upload" class="image-buttons add-img-button"
-          ><mat-icon>add_photo_alternate</mat-icon></label
+          ><mat-icon [style.color]="this.loading ? 'gray' : '#007efc'">add_photo_alternate</mat-icon></label
         >
         <input
           id="file-upload"
@@ -28,11 +29,12 @@
           accept="image/x-png,image/gif,image/jpeg"
           style="display: none"
           multiple
+          [disabled]="loading"
         />
       </div>
-      <div title="Eliminar imagen" class="img-button-container">
-        <button mat-button class="image-buttons" color="warn">
-          <mat-icon>delete</mat-icon>
+      <div *ngIf="this.user.imgURL != undefined" title="Eliminar imagen" class="img-button-container">
+        <button mat-button class="image-buttons" color="warn" [disabled]="this.loading">
+          <mat-icon [style.color]="this.loading ? 'gray' : '#F44336'">delete</mat-icon>
         </button>
       </div>
     </div>
@@ -170,7 +172,7 @@
         [formControl]="userFG.get('phone_number')"
         required
       />
-      <mat-hint *ngIf="this.editMode" align="end"
+      <mat-hint align="end"
         >{{ phoneNumber.value.length }} / 9</mat-hint
       >
       <mat-error
@@ -187,4 +189,8 @@
       </span>
     </mat-form-field>
   </form>
+</div>
+<div *ngIf="this.loading" class="loading">
+  <mat-spinner  [diameter]="40" *ngIf="loading"></mat-spinner>
+  <label style="font-style: italic; color: gray;">Guardando</label>
 </div>

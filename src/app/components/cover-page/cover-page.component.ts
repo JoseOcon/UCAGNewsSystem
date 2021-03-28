@@ -23,7 +23,6 @@ export class CoverPageComponent implements OnInit {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.currentRoute = event.url;
-        console.log(this.currentRoute);
         if (
           this.currentRoute.indexOf('/authentification') !== -1 ||
           this.currentRoute.indexOf('/reset-password') !== -1
@@ -36,7 +35,6 @@ export class CoverPageComponent implements OnInit {
   ngOnInit(): void {
     let user = this.authService.getUser();
     user = !undefined ? (this.authService.actualUser = user) : null;
-    console.log(this.authService.actualUser)
   }
 
   loginDialog() {

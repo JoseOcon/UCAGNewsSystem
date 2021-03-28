@@ -13,8 +13,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegistryComponent implements OnInit {
   public userFG: FormGroup;
-  hidePass: boolean = false;
-  hideConfrimPass: boolean = false;
   loading: boolean = false;
   chars: string =
     "(^[a-zA-Z0-9á-úÁ-Ú|`´üÿÜŸýÝ'¿?¡!<>~|/])([a-zA-Z0-9á-úÁ-Ú | -_'`´üÿÜŸýÝ,;:.¿?¡!<>~|/{'}])*$";

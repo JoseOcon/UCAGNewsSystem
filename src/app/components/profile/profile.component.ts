@@ -1,7 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { GeneralService } from 'src/app/services/general.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +18,13 @@ export class ProfileComponent implements OnInit {
 
   user: any;
   editMode: boolean = false;
+  loading: boolean = false;
 
   constructor(
     public formBuilder: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    public userService: UserService,
+    public generalService: GeneralService
   ) {
     this.userFG = this.formBuilder.group({
       name: [
@@ -57,6 +63,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getUser();
 
+    this.setData();
+  }
+
+  setData() {
     this.userFG.controls['name'].setValue(this.user.name);
     this.user.second_name != undefined
       ? this.userFG.controls['second_name'].setValue(this.user.second_name)
@@ -82,7 +92,8 @@ export class ProfileComponent implements OnInit {
     this.userFG.controls['phone_number'].enable();
   }
 
-  disableControls() {
+  async disableControls() {
+    await this.setData();
     this.userFG.controls['name'].disable();
     this.userFG.controls['second_name'].disable();
     this.userFG.controls['last_name'].disable();
@@ -91,7 +102,8 @@ export class ProfileComponent implements OnInit {
     this.userFG.controls['phone_number'].disable();
   }
 
-  editUser(){
+  editUser() {
+    this.loading = true;
     let user: User = {
       user_id: this.user.user_id,
       name: this.userFG.controls['name'].value,
@@ -100,8 +112,54 @@ export class ProfileComponent implements OnInit {
       identification: this.userFG.controls['identification'].value,
       email: this.userFG.controls['email'].value,
       phone_number: this.userFG.controls['phone_number'].value,
+      active: this.user.active,
+      comunal_member: this.user.comunal_member,
+      user_type_id: this.user.user_type_id,
+      verified: this.user.verified,
+      //imgURL: this.user.imgURL
+    };
+
+    this.userService.editUser(user).subscribe({
+      next: (data: any) => {
+        if (data.status == 204) {
+          this.authService.setUserInLocalStorage(user);
+          this.user = user;
+          this.setData();
+          this.loading = false;
+          this.generalService.showMessage(
+            '¡Se ha actualizado con éxito!',
+            'success'
+          );
+        } else {
+          this.loading = false;
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = true;
+      },
+    });
+  }
+
+  isDifferent(): boolean {
+    let name = this.userFG.controls['name'].value;
+    let second_name = this.userFG.controls['second_name'].value;
+    let last_name = this.userFG.controls['last_name'].value;
+    let identification = this.userFG.controls['identification'].value;
+    let email = this.userFG.controls['email'].value;
+    let phone_number = this.userFG.controls['phone_number'].value;
+
+    if (
+      this.user.name != name ||
+      (this.user.second_name != undefined &&
+        this.user.second_name != second_name) ||
+      this.user.last_name != last_name ||
+      this.user.identification != identification ||
+      this.user.email != email ||
+      this.user.phone_number != phone_number
+    ) {
+      return true;
     }
 
-    console.log(user)
+    return false;
   }
 }
